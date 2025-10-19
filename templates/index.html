@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src="{{ url_for('static', filename='js/preview_handler.js') }}" defer></script>
+{% endblock %}
+
+
+{% block content %}    
+    <div class="flex justify-center mt-20">
+        <div class="max-w-xl w-full">
+            <header class="mb-12">
+
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Picture" class="w-14 h-14 rounded-full mb-4">
+                <h1 class="text-xl font-bold mb-4">Juan Sebastián Ramírez Guerrero</h1>
+                <p class="text-sm mb-2">I'm a Computer Science student at EAFIT University. Based in Medellín, Colombia.</p>
+                <p class="text-sm">I'm passionate about programming and low-level systems, and I enjoy working on independent projects to deepen my understanding of the topics I love.</p>
+                
+            </header>
+
+            <section class="mb-12">
+                <h2 class="text-lg font-bold mb-2">Projects:</h2>
+                <ul class="list-inside space-y-2">
+                    {% for project in projects %}
+                        <li>
+                            <a href="{{ project.Link }}" class="project-item" data-image="{{ project.Image }}" onmousemove="show_preview(event)" onmouseleave="hide_preview()">
+                                <div class="py-2">
+                                    <div class="mb-1">
+                                        <h3 class="font-semibold text-sm inline-block mr-2">{{ project.Name }}</h3>
+                                        <span class="text-sm text-gray-500 font-bold">{{ project.Date }}</span>
+                                    </div>
+                                    <p class="text-sm">{{ project.Summary }}</p>
+                                </div>
+                                
+                            </a>
+                        </li>
+                   {% endfor %}
+                </ul>
+
+                <div id="image-preview"></div>
+            </section>
+
+            
+            <section class="mb-12">
+                <h2 class="text-lg font-bold mb-2">Education:</h2>
+                <ul class="list-inside space-y-2">
+                    {% for education in education %}
+                        <li>
+                                <div class="py-2">
+                                    <h3 class="font-semibold text-sm inline-block mr-2">{{ education.Institution }}</h3>
+                                    <span class="text-sm text-gray-500 font-bold">{{ education.StartDate }} - {% if education.EndDate %} {{ education.EndDate }} {% else %} Present {% endif %}</span>
+                                    <p class="font-semibold text-sm">{{ education.Program }}</p>
+                                    <p class="text-xs">{{ education.Description }}</p>
+
+                                    {% if education.Honors %}
+                                        <p class="text-xs italic">Honors: {{ education.Honors }}</p>
+                                    {% endif %}
+
+                                    {% if education.Link %}
+                                    <div>
+                                        <a href="{{ education.Link }}" target="_blank" rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-2 text-xs font-semibo hover:underline">
+                                            <span>View Credentials</span>
+                                            <ion-icon name="arrow-forward-outline" class="text-sm"></ion-icon>
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                   {% endfor %}
+                </ul>
+
+                <div id="image-preview"></div>
+
+            </section>
+
+            <section class="mb-12">
+                <ul class="list-inside flex flex-wrap gap-6 items-center text-base links">
+                    <li>
+                        <a href="mailto:jsramirezg2@gmail.com" class="inline-flex items-center gap-2">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            Email
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/juanser-guerrero" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                            LinkedIn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/jsramirezg2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2">
+                            <ion-icon name="logo-github"></ion-icon>
+                            GitHub
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://twitter.com/jsramirezg2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                            Twitter
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        
+        </div>
+    </div>
+{% endblock %}
+
