@@ -7,7 +7,7 @@
 
 {% block content %}    
     <div class="flex justify-center mt-20">
-        <div class="max-w-xl w-full">
+        <div class="max-w-xl w-full p-4">
             <header class="mb-12">
 
                 <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Picture" class="w-14 h-14 rounded-full mb-4">
@@ -75,7 +75,8 @@
             </section>
 
             <section class="mb-12">
-                <ul class="list-inside flex flex-wrap gap-6 items-center text-base links">
+                <!-- uses css grid for mobile and flexbox for mid/large layout -->
+                <ul class="list-inside text-base links grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6 sm:items-center">
                     <li>
                         <a href="mailto:jsramirezg2@gmail.com" class="inline-flex items-center gap-2">
                             <ion-icon name="mail-outline"></ion-icon>
