@@ -9,12 +9,18 @@ load_dotenv()
 PROJECTS_DB_ID = os.getenv("PROJECTS_DB_ID")
 BLOG_DB_ID = os.getenv("BLOG_DB_ID")
 EDUCATION_DB_ID = os.getenv("EDUCATION_DB_ID")
+UMAMI_WEBSITE_ID = os.getenv("UMAMI_WEBSITE_ID")
 
 # Create Flask application
 app = Flask(__name__)
 
 # Configuration
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+# Context processor to inject Umami analytics ID
+@app.context_processor
+def inject_analytics():
+    return dict(umami_id=UMAMI_WEBSITE_ID)
 
 # Routes
 @app.route('/')
