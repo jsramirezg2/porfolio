@@ -14,7 +14,6 @@
   const modeBtns = document.querySelectorAll('[data-set-mode]');
 
   const media = (q) => (window.matchMedia ? window.matchMedia(q) : { matches: false });
-  const darkMq = media('(prefers-color-scheme: dark)');
   const reduce = media('(prefers-reduced-motion: reduce)').matches;
   const touch = media('(pointer: coarse)').matches;
 
@@ -23,21 +22,23 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } },
   };
 
-  // ---------- color mode: follows the system until one is picked
+  // ---------- color mode: night by default, the visitor's last pick is remembered
+  // (an inline script in <head> applies a saved "day" before first paint)
 
   const BG = { day: '#f6f7f5', night: '#0f1624' };
-  let picked = null;
+  let mode = store.get('mode') === 'day' ? 'day' : 'night';
 
   function syncMode() {
-    const mode = picked || (darkMq.matches ? 'night' : 'day');
-    if (picked) root.dataset.mode = picked; else delete root.dataset.mode;
+    root.dataset.mode = mode;
     modeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setMode === mode)));
-    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
-      m.content = picked ? BG[picked] : (m.media.includes('dark') ? BG.night : BG.day);
-    });
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = BG[mode];
   }
-  modeBtns.forEach((b) => b.addEventListener('click', () => { picked = b.dataset.setMode; syncMode(); }));
-  if (darkMq.addEventListener) darkMq.addEventListener('change', syncMode);
+  modeBtns.forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.setMode;
+    store.set('mode', mode);
+    syncMode();
+  }));
   syncMode();
 
   // ---------- layout: the coral grid fills 92% x 88% of the page, centered

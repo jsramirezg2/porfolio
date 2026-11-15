@@ -20,28 +20,8 @@
   font-display: swap;
 }
 
-/* Day is the default. Night follows the system unless a mode is picked. */
+/* Night is the default. Day applies once picked (main.js remembers the choice). */
 :root {
-  --bg: #f6f7f5;
-  --fg: #18212b;
-  --dim: #66717d;
-  --coral: #1e3a66;
-  --lorenz: #8a4a00;
-  --lorenz-head: #18212b;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-mode="day"]) {
-    --bg: #0f1624;
-    --fg: #e9eef5;
-    --dim: #8b98aa;
-    --coral: #7fe0c3;
-    --lorenz: #c9954a;
-    --lorenz-head: #ffffff;
-    color-scheme: dark;
-  }
-}
-:root[data-mode="night"] {
   --bg: #0f1624;
   --fg: #e9eef5;
   --dim: #8b98aa;
@@ -49,6 +29,15 @@
   --lorenz: #c9954a;
   --lorenz-head: #ffffff;
   color-scheme: dark;
+}
+:root[data-mode="day"] {
+  --bg: #f6f7f5;
+  --fg: #18212b;
+  --dim: #66717d;
+  --coral: #1e3a66;
+  --lorenz: #8a4a00;
+  --lorenz-head: #18212b;
+  color-scheme: light;
 }
 
 [hidden] { display: none !important; }
