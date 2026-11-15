@@ -7,7 +7,7 @@ The background is a live simulation, picked per visit:
 - **Coral.** Gray–Scott reaction–diffusion (F = 0.037, k = 0.06), drawn in ASCII. Click or drag to seed new growth. It runs in a Web Worker.
 - **Lorenz.** Two particles on the Lorenz attractor (σ = 10, ρ = 28, β = 8/3) that start 0.00001 apart. The caption shows how far apart they are now. Click to restart.
 
-Coral and Lorenz alternate between visits. Press `L` or use the switch to change scenes. Both simulations pause when the tab is hidden, and settle after a few minutes. With reduced motion turned on, each one shows a finished frame instead of animating. The color mode follows the system until day or night is picked.
+Coral and Lorenz alternate between visits. Press `L` or use the switch to change scenes. Both simulations pause when the tab is hidden, and settle after a few minutes. With reduced motion turned on, each one shows a finished frame instead of animating. The site opens in night mode and remembers if a visitor switches to day.
 
 The original Flask + Notion version of the site is kept on the [`archive`](https://github.com/jsramirezg2/porfolio/tree/archive) branch.
 
