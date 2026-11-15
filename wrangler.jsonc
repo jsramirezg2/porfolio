@@ -1,0 +1,12 @@
+{
+  // Static site served by Workers Static Assets. There is no Worker script:
+  // every request is answered from ./public, with 404.html for unknown paths.
+  "name": "ramirezjuan",
+  "compatibility_date": "2026-11-13",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+}
