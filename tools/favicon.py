@@ -1,4 +1,9 @@
-"""Build public/favicon.svg: the block-shade ASCII ball (favicon F).
+"""Build the block-shade ASCII ball favicons (favicon F).
+
+  public/favicon.svg        follows the browser's color scheme (default in the HTML)
+  public/favicon-day.svg    navy, used while the site is in day mode
+  public/favicon-night.svg  mint, used while the site is in night mode
+
 
 A 9x9 sphere lit from the upper left. Each cell's brightness
 b = 0.12 + 0.88 * max(0, n.L)^0.9 picks a glyph from " ░░▒▒▓▓██".
@@ -83,20 +88,26 @@ def uses(rows):
 
 def main():
     paths = glyph_paths(sys.argv[1])
-    defs = "".join('<path id="%s" d="%s"/>' % (k, v) for k, v in paths.items())
-    svg = (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
-        "<style>.d{display:none}@media (prefers-color-scheme:dark){.l{display:none}.d{display:inline}}</style>"
-        "<defs>%s</defs>"
-        '<g class="l" fill="#1e3a66">%s</g>'
-        '<g class="d" fill="#7fe0c3">%s</g>'
-        "</svg>\n"
-    ) % (defs, uses(ball(True)), uses(ball(False)))
-    with open("public/favicon.svg", "w", encoding="utf-8") as fh:
-        fh.write(svg)
-    for label, rows in (("light", ball(True)), ("dark", ball(False))):
-        print(label)
-        print("\n".join("".join(r) for r in rows))
+    head = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+
+    def defs(names):
+        return "<defs>%s</defs>" % "".join('<path id="%s" d="%s"/>' % (k, paths[k]) for k in sorted(names))
+
+    def used(rows):
+        return {NAMES[ch] for row in rows for ch in row if ch != " "}
+
+    day, night = ball(True), ball(False)
+    files = {
+        "favicon.svg": head
+        + "<style>.d{display:none}@media (prefers-color-scheme:dark){.l{display:none}.d{display:inline}}</style>"
+        + defs(used(day) | used(night))
+        + '<g class="l" fill="#1e3a66">%s</g><g class="d" fill="#7fe0c3">%s</g></svg>\n' % (uses(day), uses(night)),
+        "favicon-day.svg": head + defs(used(day)) + '<g fill="#1e3a66">%s</g></svg>\n' % uses(day),
+        "favicon-night.svg": head + defs(used(night)) + '<g fill="#7fe0c3">%s</g></svg>\n' % uses(night),
+    }
+    for name, svg in files.items():
+        with open("public/" + name, "w", encoding="utf-8") as fh:
+            fh.write(svg)
 
 
 if __name__ == "__main__":

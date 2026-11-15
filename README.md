@@ -7,9 +7,9 @@ The background is a live simulation, picked per visit:
 - **Coral.** Gray–Scott reaction–diffusion (F = 0.037, k = 0.06), drawn in ASCII. Click or drag to seed new growth. It runs in a Web Worker.
 - **Lorenz.** Two particles on the Lorenz attractor (σ = 10, ρ = 28, β = 8/3) that start 0.00001 apart. The caption shows how far apart they are now. Click to restart.
 
-Coral and Lorenz alternate between visits. Press `L` or use the switch to change scenes. Both simulations pause when the tab is hidden, and settle after a few minutes. With reduced motion turned on, each one shows a finished frame instead of animating. The site opens in night mode and remembers if a visitor switches to day.
+Coral and Lorenz alternate between visits. Press `L` or use the switch to change scenes. Both simulations pause when the tab is hidden, and settle after a few minutes. With reduced motion turned on, each one shows a finished frame instead of animating. The site opens in night mode and remembers if a visitor switches to day. The favicon follows the mode. In day mode the ASCII art uses Geist Mono 500 and deeper ink, because thin glyphs fade on a light page.
 
-The original Flask + Notion version of the site is kept on the [`archive`](https://github.com/jsramirezg2/porfolio/tree/archive) branch.
+The original Flask + Notion version of the site is kept on the [`archive`](https://github.com/jsramirezg2/portfolio/tree/archive) branch.
 
 ## Layout
 
@@ -20,7 +20,9 @@ public/              everything that is served
   main.js            color mode, layout, Lorenz, input
   coral.worker.js    Gray–Scott simulation
   fonts/             Geist and Geist Mono, subset to Latin (SIL OFL 1.1)
-  favicon.svg        block-shade ASCII ball, light and dark variants
+  favicon.svg        block-shade ASCII ball, follows the browser's color scheme
+  favicon-day.svg    navy ball, swapped in while the site is in day mode
+  favicon-night.svg  mint ball, swapped in while the site is in night mode
   favicon.ico, apple-touch-icon.png, og.png
   404.html, robots.txt
   _headers           security headers, CSP, font caching
@@ -52,7 +54,7 @@ Cloudflare Web Analytics, with automatic setup on the proxied domain (**Analytic
 
 ```sh
 pip install fonttools brotli playwright pillow
-python3 tools/favicon.py path/to/GeistMono-SemiBold.woff2   # public/favicon.svg
+python3 tools/favicon.py path/to/GeistMono-SemiBold.woff2   # public/favicon*.svg
 python3 tools/render.py /usr/bin/google-chrome               # og.png, favicon.ico, apple-touch-icon.png
 ```
 
