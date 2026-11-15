@@ -19,6 +19,14 @@
   font-style: normal;
   font-display: swap;
 }
+/* Only the day-mode art uses 500, so night visitors never download it. */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Night is the default. Day applies once picked (main.js remembers the choice). */
 :root {
@@ -28,15 +36,18 @@
   --coral: #7fe0c3;
   --lorenz: #c9954a;
   --lorenz-head: #ffffff;
+  --art-weight: 400;
   color-scheme: dark;
 }
+/* Day: thin glyphs fade on a light page, so the art uses heavier strokes and deeper ink. */
 :root[data-mode="day"] {
   --bg: #f6f7f5;
   --fg: #18212b;
   --dim: #66717d;
-  --coral: #1e3a66;
-  --lorenz: #8a4a00;
+  --coral: #112a50;
+  --lorenz: #6e3a00;
   --lorenz-head: #18212b;
+  --art-weight: 500;
   color-scheme: light;
 }
 
@@ -86,6 +97,7 @@ button[aria-pressed="true"] { opacity: 1; text-decoration: underline; text-under
   margin: 0;
   font-family: "Geist Mono", ui-monospace, monospace;
   font-size: 11px;
+  font-weight: var(--art-weight);
   line-height: 1.12;
   white-space: pre;
   pointer-events: none;

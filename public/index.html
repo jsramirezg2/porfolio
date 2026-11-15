@@ -9,9 +9,9 @@
 <link rel="canonical" href="https://ramirezjuan.dev/">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0f1624">
-<script>try{if(localStorage.getItem('mode')==='day')document.documentElement.dataset.mode='day'}catch(e){}</script>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" id="icon">
+<script>try{var d=localStorage.getItem('mode')==='day'}catch(e){}if(d)document.documentElement.dataset.mode='day';document.getElementById('icon').href='/favicon-'+(d?'day':'night')+'.svg'</script>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ramirezjuan.dev/">

@@ -1,10 +1,10 @@
 # The sha256 in script-src allows the one-line inline script in index.html and 404.html
-# that applies a saved day mode before first paint. Edit that script and the hash must change.
+# that applies a saved day mode and the matching favicon before first paint. Edit that script and the hash must change.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-bq6NnOECdhUaLi/tvHIv7Jjyf4ZFhutDkR1Rzkfj3WY=' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data:; style-src 'self'; font-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-ENVpkZwh60B+DleG9ov3x3RA4zjOfh6joWEFxkHFUuU=' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data:; style-src 'self'; font-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable

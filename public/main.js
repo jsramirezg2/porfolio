@@ -23,7 +23,7 @@
   };
 
   // ---------- color mode: night by default, the visitor's last pick is remembered
-  // (an inline script in <head> applies a saved "day" before first paint)
+  // (an inline script in <head> applies a saved "day" and its favicon before first paint)
 
   const BG = { day: '#f6f7f5', night: '#0f1624' };
   let mode = store.get('mode') === 'day' ? 'day' : 'night';
@@ -33,6 +33,8 @@
     modeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setMode === mode)));
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = BG[mode];
+    const icon = $('icon');
+    if (icon) icon.href = '/favicon-' + mode + '.svg';
   }
   modeBtns.forEach((b) => b.addEventListener('click', () => {
     mode = b.dataset.setMode;
